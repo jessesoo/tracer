@@ -46,7 +46,7 @@ function download(csv, title) {
 let sources = [];
 let translations = [];
 
-function prepareFileAndConfirm() {
+function downloadFile() {
   const title = document.querySelector(".episode-title").textContent;
 
   let csv = `ZH߷EN\n`;
@@ -88,7 +88,7 @@ function go() {
       return;
     }
 
-    prepareFileAndConfirm();
+    downloadFile();
   });
 }
 
