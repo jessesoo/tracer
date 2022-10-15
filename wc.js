@@ -37,7 +37,7 @@ function download(csv, title) {
   const a = document.createElement("a");
   a.href = encodeURI("data:text/csv;charset=utf-8," + csv);
   a.target = "_blank";
-  a.download = `${title} (߷).csv`;
+  a.download = `${title} (⌚).csv`;
   
   document.body.appendChild(a)
   a.click();
@@ -49,10 +49,10 @@ let translations = [];
 function downloadFile() {
   const title = document.querySelector(".episode-title").textContent;
 
-  let csv = `ZH߷EN\n`;
+  let csv = `ZH⌚EN\n`;
 
   for (let i = 0; i < translations.length; i++) {
-    csv += `${sources[i]}߷${translations[i]}\n`;
+    csv += `${sources[i]}⌚${translations[i]}\n`;
   }
 
   download(csv, title);
