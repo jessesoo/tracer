@@ -38,26 +38,30 @@ function download(csv, title) {
   a.href = encodeURI("data:text/csv;charset=utf-8," + csv);
   a.target = "_blank";
   a.download = `${title} (⌚).csv`;
-  
-  document.body.appendChild(a)
+
+  document.body.appendChild(a);
   a.click();
 }
 
-let sources = [];
-let translations = [];
-
-function downloadFile() {
+function downloadFile({ sources, translations } = {}) {
   const title = document.querySelector(".episode-title").textContent;
 
   let csv = `ZH⌚EN\n`;
 
   for (let i = 0; i < translations.length; i++) {
-    csv += `${sources[i]}⌚${translations[i]}\n`;
+    const splitSources = sources[i][0].split("\n");
+    const splitTranslations = translations[i][0].split("\n");
+    const len = Math.max(splitSources.length, splitTranslations.length);
+
+    for (let i = 0; i < len; i++) {
+      const source = i < splitSources.length ? splitSources[i] : "";
+      const translation =
+        i < splitTranslations.length ? splitTranslations[i] : "";
+      csv += `${source}⌚${translation}\n`;
+    }
   }
 
   download(csv, title);
-  sources = [];
-  translations = [];
 }
 
 function getImageCards() {
@@ -72,7 +76,7 @@ function hasMore() {
   );
 }
 
-function go() {
+function go({ sources = [], translations = [] } = {}) {
   Array.from(document.querySelectorAll(".target-input")).forEach((target) => {
     translations.push([target.value]);
   });
@@ -81,14 +85,16 @@ function go() {
     sources.push([source.value]);
   });
 
+  const data = { sources, translations };
+
   next();
   waitUntilLoaded(() => {
     if (hasMore()) {
-      go();
+      go(data);
       return;
     }
 
-    downloadFile();
+    downloadFile(data);
   });
 }
 
