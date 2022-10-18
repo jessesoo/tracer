@@ -47,6 +47,10 @@ function downloadFile({ sources, translations } = {}) {
   const title = document.querySelector(".episode-title").textContent;
 
   let csv = `ZH⌚EN\n`;
+  const wc = {
+    zh: 0,
+    en: 0,
+  };
 
   for (let i = 0; i < translations.length; i++) {
     const splitSources = sources[i][0].split("\n");
@@ -58,10 +62,26 @@ function downloadFile({ sources, translations } = {}) {
       const translation =
         i < splitTranslations.length ? splitTranslations[i] : "";
       csv += `${source}⌚${translation}\n`;
+
+      wc.zh += match(source, /[\p{sc=Han}]{1}/gu);
+      wc.zh += match(source, /\w+/g);
+      wc.en += match(translation, /\w+/g);
     }
   }
 
+  csv += `${wc.zh}⌚${wc.en}\n`;
+
   download(csv, title);
+
+  alert(`${wc.zh} (Chinese), ${wc.en} (English). Summary will be downloaded.`);
+}
+
+function match(text, pattern) {
+  const result = text.match(pattern);
+  if (result) {
+    return result.length;
+  }
+  return 0;
 }
 
 function getImageCards() {
