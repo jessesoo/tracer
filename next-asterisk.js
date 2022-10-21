@@ -34,8 +34,11 @@ function makeNextAsterisk() {
         if (i === inputList.length - 1) {
           currentIndex = null;
           textIndex = null;
-          i = hasMatch ? 0 : i;
-          continue;
+
+          if (hasMatch) {
+            i = 0;
+            continue;
+          }
         }
       }
 
@@ -66,6 +69,8 @@ function main() {
     },
     true
   );
+
+  console.log('next asterisk is running...')
 }
 
 main();
