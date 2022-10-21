@@ -19,7 +19,17 @@ function onEscape(event) {
   }
 }
 
+function isTranslationPage() {
+  return window.location.href.startsWith(
+    "https://www.bilibilicomics.com/tracer/#/translate-editor"
+  );
+}
+
 function main() {
+  if (!isTranslationPage()) {
+    return;
+  }
+
   const start = parseInt(prompt("Start from", "1"));
   const stop = parseInt(prompt("Stop at", `${getImageCards().length}`));
 
