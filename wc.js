@@ -36,20 +36,27 @@ function run() {
 }
 
 function getContainer(callback) {
-    const container = document.querySelector(".operation-content")
-    if (container) {
-        callback(container);
-        return;
-    }
+  const container = document.querySelector(".operation-content");
+  if (container) {
+    callback(container);
+    return;
+  }
 
-    setTimeout(() => {
-        getContainer(callback);
-    }, 100);
+  setTimeout(() => {
+    getContainer(callback);
+  }, 100);
 }
 
 function addButton() {
+  const existing = document.querySelector(`div[data-name="gm-wc"]`);
+
+  if (existing) {
+    return;
+  }
+
   const button = document.createElement("div");
   button.innerHTML = "🧮";
+  button.dataset.name = "gm-wc";
   button.style.width = "40px";
   button.style.height = "40px";
   button.style.display = "flex";
@@ -59,9 +66,9 @@ function addButton() {
   button.style.order = 2;
   button.addEventListener("click", run);
 
-  getContainer(container => {
+  getContainer((container) => {
     container.prepend(button);
-  })
+  });
 }
 
 function main() {
