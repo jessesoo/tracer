@@ -2,7 +2,7 @@
 
 1. Go to the chapter that you want to extract word count from.
 2. Copy and paste the script (wc.js or wc-minified.js) into the browser's console and hit **Enter**. You may import this script using GreaseMonkey if you so choose.
-3. A 🧮 emoji will appear at the top.
+3. An emoji (🧮) will appear at the top.
 4. Click on the emoji to run word count.
 5. Wait until the script finishes running. 
 
