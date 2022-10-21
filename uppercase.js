@@ -25,6 +25,12 @@ function isTranslationPage() {
   );
 }
 
+function getDialogRejectButton() {
+  return document.querySelector(
+    ".p-dialog-footer .p-button.p-confirm-dialog-reject"
+  );
+}
+
 function run() {
   const promptStart = prompt("Start from", "1");
 
@@ -69,12 +75,20 @@ function run() {
 
   card.click();
 
-  waitUntilLoaded(() => {
-    go({ stop });
-  });
+  setTimeout(() => {
+    const button = getDialogRejectButton();
 
-  window.removeEventListener("keydown", onEscape);
-  window.addEventListener("keydown", onEscape, true);
+    if (button) {
+      button.click();
+    }
+
+    waitUntilLoaded(() => {
+      go({ stop });
+    });
+
+    window.removeEventListener("keydown", onEscape);
+    window.addEventListener("keydown", onEscape, true);
+  }, 300);
 }
 
 function getContainer(callback) {
@@ -107,6 +121,8 @@ function addButton() {
   button.style.justifyContent = "center";
   button.style.cursor = "pointer";
   button.style.order = 1;
+  button.classList.add("editor-button");
+  button.classList.add("p-ripple");
   button.addEventListener("click", run);
 
   getContainer((container) => {
