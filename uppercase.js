@@ -11,22 +11,35 @@ function waitUntilLoaded(callback) {
   }, 100);
 }
 
-function main() {
-  const card = document.querySelector(".image-card");
+function main({ start = 1, stop = null } = {}) {
+  const cardList = document.querySelectorAll(".image-card");
 
-  if (!card) {
+  if (cardList.length === 0) {
     alert("Please refresh the page.");
     return;
   }
 
+  const card = cardList[Math.max(0, start - 1)];
+
   if (card.classList.contains("actived")) {
-    go();
+    go({ stop });
     return;
   }
 
   card.click();
 
-  waitUntilLoaded(go);
+  waitUntilLoaded(() => {
+    go({ stop });
+  });
+}
+
+function getActiveIndex() {
+  const cardList = getImageCards();
+  const index = cardList.findIndex((card) =>
+    card.classList.contains("actived")
+  );
+
+  return index === -1 ? null : index;
 }
 
 function getImageCards() {
@@ -49,7 +62,15 @@ function hasMore() {
   );
 }
 
-function go() {
+function done() {
+  alert("Done.");
+}
+
+let cancel = false;
+
+function go({ stop } = {}) {
+  const index = getActiveIndex();
+
   Array.from(document.querySelectorAll(".target-input")).forEach((target) => {
     if (target.value == "") {
       return;
@@ -61,16 +82,27 @@ function go() {
 
   save();
   waitUntilLoaded(() => {
+    if (stop != null && index === stop - 1) {
+      done();
+      return;
+    }
+
     next();
     waitUntilLoaded(() => {
-      if (hasMore()) {
-        go();
+      if (!cancel && hasMore()) {
+        go({ stop });
         return;
       }
 
-      alert("Done.");
+      done();
     });
   });
 }
 
-main();
+window.addEventListener("keydown", (event) => {
+  if (event.code === "Escape") {
+    cancel = true;
+  }
+}, true);
+
+main({ start: 1, stop: null });
