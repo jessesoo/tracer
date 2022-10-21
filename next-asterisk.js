@@ -79,7 +79,17 @@ function onTab(event) {
   }
 }
 
+function isTranslationPage() {
+  return window.location.href.startsWith(
+    "https://www.bilibilicomics.com/tracer/#/translate-editor"
+  );
+}
+
 function main() {
+  if (!isTranslationPage()) {
+    return;
+  }
+
   window.removeEventListener("keydown", onTab);
   window.addEventListener("keydown", onTab, true);
   console.log("next asterisk is running...");
