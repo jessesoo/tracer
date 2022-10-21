@@ -64,7 +64,11 @@ function addButton() {
   button.style.alignItems = "center";
   button.style.justifyContent = "center";
   button.style.order = 2;
-  button.addEventListener("click", run);
+  button.addEventListener("click", (event) => {
+    if (confirm("Do you want to run word count?")) {
+      run();
+    }
+  });
 
   getContainer((container) => {
     container.prepend(button);
