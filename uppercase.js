@@ -26,8 +26,20 @@ function isTranslationPage() {
 }
 
 function run() {
-  const start = parseInt(prompt("Start from", "1"));
-  const stop = parseInt(prompt("Stop at", `${getImageCards().length}`));
+  const promptStart = prompt("Start from", "1");
+
+  if (promptStart == null) {
+    return;
+  }
+
+  const promptEnd = prompt("Stop at", `${getImageCards().length}`);
+
+  if (promptEnd == null) {
+    return;
+  }
+
+  const start = parseInt(promptStart);
+  const stop = parseInt(promptEnd);
 
   if (isNaN(start) || isNaN(stop)) {
     alert("Please enter only numbers.");
@@ -35,7 +47,7 @@ function run() {
     return;
   }
 
-  if (stop > start) {
+  if (start > stop) {
     alert("Stop page cannot come before start page number");
     run();
     return;
