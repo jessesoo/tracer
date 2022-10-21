@@ -1,18 +1,31 @@
+function getInputList() {
+  return Array.from(document.querySelectorAll(".source-input"));
+}
+
+function hasMatch() {
+  const inputList = getInputList();
+
+  return (
+    inputList
+      .map((input) => input.value)
+      .join("")
+      .indexOf("*") !== -1
+  );
+}
+
 function makeNextAsterisk() {
   let url;
   let currentIndex;
   let textIndex;
-  let hasMatch = false;
 
   return function next() {
     if (url !== window.location.href) {
       url = window.location.href;
       currentIndex = null;
       textIndex = null;
-      hasMatch = false;
     }
 
-    const inputList = Array.from(document.querySelectorAll(".source-input"));
+    const inputList = getInputList();
 
     for (let i = 0; i < inputList.length; ) {
       // Start from where it left off.
@@ -26,7 +39,6 @@ function makeNextAsterisk() {
 
       if (textIndex !== -1) {
         currentIndex = i;
-        hasMatch = true;
         onFound(input, textIndex);
         break;
       } else {
@@ -34,11 +46,7 @@ function makeNextAsterisk() {
         if (i === inputList.length - 1) {
           currentIndex = null;
           textIndex = null;
-
-          if (hasMatch) {
-            i = 0;
-            continue;
-          }
+          i = hasMatch(inputList) ? 0 : i;
         }
       }
 
@@ -61,6 +69,10 @@ function main() {
     "keydown",
     (event) => {
       if (event.code === "Tab") {
+        if (!hasMatch()) {
+            return;
+        }
+
         nextAsterisk();
         event.preventDefault();
         event.stopPropagation();
@@ -70,7 +82,7 @@ function main() {
     true
   );
 
-  console.log('next asterisk is running...')
+  console.log("next asterisk is running...");
 }
 
 main();
