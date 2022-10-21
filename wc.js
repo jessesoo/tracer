@@ -63,6 +63,7 @@ function addButton() {
   button.style.flexFlow = "row nowrap";
   button.style.alignItems = "center";
   button.style.justifyContent = "center";
+  button.style.cursor = "pointer";
   button.style.order = 2;
   button.addEventListener("click", (event) => {
     if (confirm("Do you want to run word count?")) {
