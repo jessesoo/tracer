@@ -81,8 +81,7 @@ function addButton() {
     button.style.flexFlow = "row nowrap";
     button.style.alignItems = "center";
     button.style.justifyContent = "center";
-    button.classList.add("editor-button");
-    button.classList.add("p-ripple");
+    button.style.order = 1;
     button.addEventListener("click", run);
   
     getContainer(container => {
