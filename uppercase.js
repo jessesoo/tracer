@@ -19,7 +19,16 @@ function onEscape(event) {
   }
 }
 
-function main({ start = 1, stop = null } = {}) {
+function main() {
+  const start = parseInt(prompt("Start from", "1"));
+  const stop = parseInt(prompt("Stop at", `${getImageCards().length}`));
+
+  if (isNaN(start) || isNaN(stop)) {
+    alert("Please enter only numbers.");
+    main();
+    return;
+  }
+
   const cardList = document.querySelectorAll(".image-card");
 
   if (cardList.length === 0) {
@@ -125,4 +134,4 @@ function go({ stop } = {}) {
   });
 }
 
-main({ start: 1, stop: null });
+main();
