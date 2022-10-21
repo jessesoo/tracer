@@ -17,6 +17,12 @@ function isTranslationPage() {
   );
 }
 
+function getDialogRejectButton() {
+  return document.querySelector(
+    ".p-dialog-footer .p-button.p-confirm-dialog-reject"
+  );
+}
+
 function run() {
   const card = document.querySelector(".image-card");
 
@@ -32,7 +38,15 @@ function run() {
 
   card.click();
 
-  waitUntilLoaded(go);
+  setTimeout(() => {
+      const button = getDialogRejectButton();
+    
+      if (button) {
+        button.click();
+      }
+    
+      waitUntilLoaded(go);
+  }, 300);
 }
 
 function getContainer(callback) {
@@ -65,8 +79,14 @@ function addButton() {
   button.style.justifyContent = "center";
   button.style.cursor = "pointer";
   button.style.order = 2;
+  button.classList.add("editor-button");
+  button.classList.add("p-ripple");
   button.addEventListener("click", (event) => {
-    if (confirm("Do you want to run word count?")) {
+    if (
+      confirm(
+        "Do you want to run word count? ⚠️ Any unsaved changes will be lost."
+      )
+    ) {
       run();
     }
   });
