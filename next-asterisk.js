@@ -64,25 +64,24 @@ function onFound(input, textIndex) {
   input.scrollIntoView();
 }
 
-function main() {
+function onTab(event) {
   const nextAsterisk = makeNextAsterisk();
 
-  window.addEventListener(
-    "keydown",
-    (event) => {
-      if (event.code === "Tab") {
-        if (!hasMatch()) {
-          return;
-        }
-        nextAsterisk();
-        event.preventDefault();
-        event.stopPropagation();
-        return;
-      }
-    },
-    true
-  );
+  if (event.code === "Tab") {
+    if (!hasMatch()) {
+      return;
+    }
 
+    nextAsterisk();
+    event.preventDefault();
+    event.stopPropagation();
+    return;
+  }
+}
+
+function main() {
+  window.removeEventListener("keydown", onTab);
+  window.addEventListener("keydown", onTab, true);
   console.log("next asterisk is running...");
 }
 
