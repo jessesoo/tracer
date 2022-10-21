@@ -1,4 +1,3 @@
-
 var cancel = false;
 
 function waitUntilLoaded(callback) {
@@ -27,66 +26,79 @@ function isTranslationPage() {
 }
 
 function run() {
-    const start = parseInt(prompt("Start from", "1"));
-    const stop = parseInt(prompt("Stop at", `${getImageCards().length}`));
-  
-    if (isNaN(start) || isNaN(stop)) {
-      alert("Please enter only numbers.");
-      main();
-      return;
-    }
-  
-    const cardList = document.querySelectorAll(".image-card");
-  
-    if (cardList.length === 0) {
-      alert("Please refresh the page.");
-      return;
-    }
-  
-    const card = cardList[Math.max(0, start - 1)];
-  
-    if (card.classList.contains("actived")) {
-      go({ stop });
-      return;
-    }
-  
-    card.click();
-  
-    waitUntilLoaded(() => {
-      go({ stop });
-    });
-  
-    window.removeEventListener("keydown", onEscape);
-    window.addEventListener("keydown", onEscape, true);
+  const start = parseInt(prompt("Start from", "1"));
+  const stop = parseInt(prompt("Stop at", `${getImageCards().length}`));
+
+  if (isNaN(start) || isNaN(stop)) {
+    alert("Please enter only numbers.");
+    run();
+    return;
+  }
+
+  if (stop > start) {
+    alert("Stop page cannot come before start page number");
+    run();
+    return;
+  }
+
+  const cardList = document.querySelectorAll(".image-card");
+
+  if (cardList.length === 0) {
+    alert("Please refresh the page.");
+    return;
+  }
+
+  const card = cardList[Math.max(0, start - 1)];
+
+  if (card.classList.contains("actived")) {
+    go({ stop });
+    return;
+  }
+
+  card.click();
+
+  waitUntilLoaded(() => {
+    go({ stop });
+  });
+
+  window.removeEventListener("keydown", onEscape);
+  window.addEventListener("keydown", onEscape, true);
 }
 
 function getContainer(callback) {
-    const container = document.querySelector(".operation-content")
-    if (container) {
-        callback(container);
-        return;
-    }
+  const container = document.querySelector(".operation-content");
+  if (container) {
+    callback(container);
+    return;
+  }
 
-    setTimeout(() => {
-        getContainer(callback);
-    }, 100);
+  setTimeout(() => {
+    getContainer(callback);
+  }, 100);
 }
 
 function addButton() {
-    const button = document.createElement("div");
-    button.innerHTML = "T";
-    button.style.width = "40px";
-    button.style.height = "40px";
-    button.style.display = "flex";
-    button.style.flexFlow = "row nowrap";
-    button.style.alignItems = "center";
-    button.style.justifyContent = "center";
-    button.style.order = 1;
-    button.addEventListener("click", run);
-  
-    getContainer(container => {
-      container.prepend(button);
-    })
+  const existing = document.querySelector(`div[data-name="gm-uppercase"]`);
+
+  if (existing) {
+    return;
+  }
+
+  const button = document.createElement("div");
+  button.innerHTML = "T";
+  button.dataset.name = "gm-uppercase";
+  button.style.width = "40px";
+  button.style.height = "40px";
+  button.style.display = "flex";
+  button.style.flexFlow = "row nowrap";
+  button.style.alignItems = "center";
+  button.style.justifyContent = "center";
+  button.style.order = 1;
+  button.addEventListener("click", run);
+
+  getContainer((container) => {
+    container.prepend(button);
+  });
 }
 
 function main() {
