@@ -17,11 +17,7 @@ function isTranslationPage() {
   );
 }
 
-function main() {
-  if (!isTranslationPage()) {
-    return;
-  }
-
+function run() {
   const card = document.querySelector(".image-card");
 
   if (!card) {
@@ -37,6 +33,44 @@ function main() {
   card.click();
 
   waitUntilLoaded(go);
+}
+
+function getContainer(callback) {
+    const container = document.querySelector(".operation-content")
+    if (container) {
+        callback(container);
+        return;
+    }
+
+    setTimeout(() => {
+        getContainer(callback);
+    }, 100);
+}
+
+function addButton() {
+  const button = document.createElement("div");
+  button.innerHTML = "🧮";
+  button.style.width = "40px";
+  button.style.height = "40px";
+  button.style.display = "flex";
+  button.style.flexFlow = "row nowrap";
+  button.style.alignItems = "center";
+  button.style.justifyContent = "center";
+  button.classList.add("editor-button");
+  button.classList.add("p-ripple");
+  button.addEventListener("click", run);
+
+  getContainer(container => {
+    container.prepend(button);
+  })
+}
+
+function main() {
+  if (!isTranslationPage()) {
+    return;
+  }
+
+  addButton();
 }
 
 function next() {
