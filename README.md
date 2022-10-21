@@ -5,8 +5,7 @@
 * [Greasemonkey (Firefox)](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/)
 * [Tampermonkey (Chrome/Edge)](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en)
 3. An emoji 🧮 will appear at the top.
-4. Save your work.
-5. Click on the emoji to run word count.
+4. Save your work and click on the emoji to run word count.
 6. Wait until the script finishes running. 
  
 ![Screenshot 2022-10-22 at 4 21 51 AM](https://user-images.githubusercontent.com/70749497/197282239-ee081439-0742-4dff-9170-3dbf62349d3e.png)
