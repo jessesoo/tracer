@@ -1,108 +1,76 @@
-function waitUntilLoaded(callback) {
-  setTimeout(() => {
-    const loading = document.querySelector(".loading-container");
+function makeNextAsterisk() {
+  let url;
+  let currentIndex;
+  let textIndex;
+  let hasMatch = false;
 
-    if (loading) {
-      waitUntilLoaded(callback);
-      return;
+  return function next() {
+    if (url !== window.location.href) {
+      url = window.location.href;
+      currentIndex = null;
+      textIndex = null;
+      hasMatch = false;
     }
 
-    callback();
-  }, 100);
-}
+    const inputList = Array.from(document.querySelectorAll(".source-input"));
 
-function main({ start = 1, stop = null } = {}) {
-  const cardList = document.querySelectorAll(".image-card");
-
-  if (cardList.length === 0) {
-    alert("Please refresh the page.");
-    return;
-  }
-
-  const card = cardList[Math.max(0, start - 1)];
-
-  if (card.classList.contains("actived")) {
-    go({ stop });
-    return;
-  }
-
-  card.click();
-
-  waitUntilLoaded(() => {
-    go({ stop });
-  });
-}
-
-function getActiveIndex() {
-  const cardList = getImageCards();
-  const index = cardList.findIndex((card) =>
-    card.classList.contains("actived")
-  );
-
-  return index === -1 ? null : index;
-}
-
-function getImageCards() {
-  return Array.from(document.querySelectorAll(".image-card"));
-}
-
-function next() {
-  document.querySelector(".bottom-action").childNodes[1].childNodes[2].click();
-}
-
-function save() {
-  document.querySelector(".bottom-action").childNodes[0].click();
-}
-
-function hasMore() {
-  const cards = getImageCards();
-
-  return (
-    cards.length > 0 && !cards[cards.length - 1].classList.contains("actived")
-  );
-}
-
-function done() {
-  alert("Done.");
-}
-
-let cancel = false;
-
-function go({ stop } = {}) {
-  const index = getActiveIndex();
-
-  Array.from(document.querySelectorAll(".target-input")).forEach((target) => {
-    if (target.value == "") {
-      return;
-    }
-
-    target.value = target.value.toUpperCase();
-    target.dispatchEvent(new Event("input", { bubbles: true }));
-  });
-
-  save();
-  waitUntilLoaded(() => {
-    if (stop != null && index === stop - 1) {
-      done();
-      return;
-    }
-
-    next();
-    waitUntilLoaded(() => {
-      if (!cancel && hasMore()) {
-        go({ stop });
-        return;
+    for (let i = 0; i < inputList.length; ) {
+      // Start from where it left off.
+      if (currentIndex != null) {
+        i = currentIndex;
+        currentIndex = null;
       }
 
-      done();
-    });
-  });
+      const input = inputList[i];
+      textIndex = input.value.indexOf("*", Math.max(textIndex, 0) + 1);
+
+      if (textIndex !== -1) {
+        currentIndex = i;
+        hasMatch = true;
+        onFound(input, textIndex);
+        break;
+      } else {
+        // Go back to the first match.
+        if (i === inputList.length - 1) {
+          currentIndex = null;
+          textIndex = null;
+
+          if (hasMatch) {
+            i = 0;
+            continue;
+          }
+        }
+      }
+
+      i += 1;
+    }
+  };
 }
 
-window.addEventListener("keydown", (event) => {
-  if (event.code === "Escape") {
-    cancel = true;
-  }
-}, true);
+function onFound(input, textIndex) {
+  input.focus();
+  input.selectionStart = textIndex;
+  input.selectionEnd = textIndex + 1;
+  input.scrollIntoView();
+}
 
-main({ start: 1, stop: null });
+function main() {
+  const nextAsterisk = makeNextAsterisk();
+
+  window.addEventListener(
+    "keydown",
+    (event) => {
+      if (event.code === "Tab") {
+        nextAsterisk();
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+    },
+    true
+  );
+
+  console.log('next asterisk is running...')
+}
+
+main();
