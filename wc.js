@@ -171,7 +171,7 @@ function downloadFile({ sources, translations } = {}) {
 
   if (
     confirm(
-      `${title}: ${wc.zh} (Chinese), ${wc.en} (English). Press OK to downloaded a summary.`
+      `${title}: ${wc.zh} (Chinese), ${wc.en} (English). Press OK to download a summary.`
     )
   ) {
     download(csv, title);
