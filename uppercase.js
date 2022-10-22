@@ -121,7 +121,7 @@ function addButton() {
   }
 
   const button = document.createElement("div");
-  button.innerHTML = "T";
+  button.innerHTML = "Aa";
   button.dataset.name = "gm-uppercase";
   button.style.width = "40px";
   button.style.height = "40px";
