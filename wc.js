@@ -26,7 +26,7 @@ function getDialogRejectButton(callback, { delay = 500 } = {}) {
     setTimeout(() => {
       getDialogRejectButton(callback, { delay: delay - 100 });
     }, 100);
-    
+
     return;
   }
 
@@ -158,11 +158,13 @@ function downloadFile({ sources, translations } = {}) {
 
   csv += `${wc.zh}⌚${wc.en}\n`;
 
-  download(csv, title);
-
-  alert(
-    `${title}: ${wc.zh} (Chinese), ${wc.en} (English). Summary will be downloaded.`
-  );
+  if (
+    confirm(
+      `${title}: ${wc.zh} (Chinese), ${wc.en} (English). Press OK to downloaded a summary.`
+    )
+  ) {
+    download(csv, title);
+  }
 }
 
 function match(text, pattern) {
