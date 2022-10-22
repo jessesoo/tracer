@@ -25,10 +25,28 @@ function isTranslationPage() {
   );
 }
 
-function getDialogRejectButton() {
-  return document.querySelector(
+function getDialogRejectButton(callback, { delay = 500 } = {}) {
+  const button = document.querySelector(
     ".p-dialog-footer .p-button.p-confirm-dialog-reject"
   );
+
+  if (!button && delay > 0) {
+    setTimeout(() => {
+      getDialogRejectButton(callback, { delay: delay - 100 });
+    }, 100);
+  }
+
+  return callback(button);
+}
+
+function waitUntilCancel(callback) {
+  getDialogRejectButton((button) => {
+    if (button) {
+      button.click();
+    }
+
+    waitUntilLoaded(callback);
+  });
 }
 
 function run() {
@@ -75,20 +93,12 @@ function run() {
 
   card.click();
 
-  setTimeout(() => {
-    const button = getDialogRejectButton();
-
-    if (button) {
-      button.click();
-    }
-
-    waitUntilLoaded(() => {
-      go({ stop });
-    });
-
+  waitUntilCancel(() => {
     window.removeEventListener("keydown", onEscape);
     window.addEventListener("keydown", onEscape, true);
-  }, 300);
+
+    go({ stop });
+  });
 }
 
 function getContainer(callback) {
@@ -123,7 +133,15 @@ function addButton() {
   button.style.order = 1;
   button.classList.add("editor-button");
   button.classList.add("p-ripple");
-  button.addEventListener("click", run);
+  button.addEventListener("click", (event) => {
+    if (
+      confirm(
+        "Do you want to run uppercase? ⚠️ Any unsaved changes will be lost."
+      )
+    ) {
+      run();
+    }
+  });
 
   getContainer((container) => {
     container.prepend(button);
@@ -205,6 +223,7 @@ function go({ stop } = {}) {
       next(() => {
         if (cancel) {
           done();
+          cancel = false;
           return;
         }
 
