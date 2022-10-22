@@ -11,11 +11,12 @@
 4. Save your work and click on the icon to run word count.
 5. Wait until the script finishes running. 
 
-![Screenshot 2022-10-22 at 9 30 13 PM](https://user-images.githubusercontent.com/70749497/197341757-33ed1e3c-d315-427f-9128-09a64e8d6457.png)
+![Screenshot 2022-10-22 at 10 40 49 PM](https://user-images.githubusercontent.com/70749497/197345249-7750df74-c294-4500-853b-a73deee45eb5.png)
 
-6. Press OK to download a summary including the translations. ⚠️ Don't change the file name yet!
+6. Press OK to download a summary. ⚠️ Don't change the file name yet!
 7. Import the CSV file into Google Sheets. Choose "custom separator". Copy and paste the separator in the file name (wrapped in parentheses).
 
 ![Screenshot 2022-10-19 at 4 56 56 AM](https://user-images.githubusercontent.com/70749497/196543439-fe5ed153-c44b-49ec-be0b-564b7b42b9b9.png)
 
 8. Done!
+
