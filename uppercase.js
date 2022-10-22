@@ -136,7 +136,7 @@ function addButton() {
   button.addEventListener("click", (event) => {
     if (
       confirm(
-        "Do you want to run uppercase? ⚠️ Any unsaved changes will be lost."
+        "Do you want to capitalize translations? ⚠️ Any unsaved changes will be lost."
       )
     ) {
       run();
