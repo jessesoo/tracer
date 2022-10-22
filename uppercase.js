@@ -34,6 +34,8 @@ function getDialogRejectButton(callback, { delay = 500 } = {}) {
     setTimeout(() => {
       getDialogRejectButton(callback, { delay: delay - 100 });
     }, 100);
+    
+    return;
   }
 
   return callback(button);
