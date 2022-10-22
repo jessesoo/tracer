@@ -133,30 +133,41 @@ function download(csv, title) {
 function downloadFile({ sources, translations } = {}) {
   const title = document.querySelector(".episode-title").textContent;
 
-  let csv = `ZH⌚EN\n`;
+  let csv = `Page⌚ZH⌚EN\n`;
   const wc = {
     zh: 0,
     en: 0,
   };
 
+  debugger;
+
   for (let i = 0; i < translations.length; i++) {
-    const splitSources = sources[i][0].split("\n");
-    const splitTranslations = translations[i][0].split("\n");
-    const len = Math.max(splitSources.length, splitTranslations.length);
+    const pageTranslations = translations[i];
+    const pageSources = sources[i];
+    const pageLength = Math.max(pageTranslations.length, pageSources.length);
 
-    for (let i = 0; i < len; i++) {
-      const source = i < splitSources.length ? splitSources[i] : "";
-      const translation =
-        i < splitTranslations.length ? splitTranslations[i] : "";
-      csv += `${source}⌚${translation}\n`;
+    for (let j = 0; j < pageLength; j++) {
+      const translation = pageTranslations[j];
+      const source = pageSources[j];
 
-      wc.zh += match(source, /[\p{sc=Han}]{1}/gu);
-      wc.zh += match(source, /\w+/g);
-      wc.en += match(translation, /\w+/g);
+      const lineTranslations = translation.split("\n");
+      const lineSources = source.split("\n");
+      const lineLength = Math.max(lineTranslations.length, lineSources.length);
+
+      for (let k = 0; k < lineLength; k++) {
+        const translation =
+          k < lineTranslations.length ? lineTranslations[k] : "";
+        const source = k < lineSources.length ? lineSources[k] : "";
+        csv += `${i + 1}-${j + 1}⌚${source}⌚${translation}\n`;
+
+        wc.zh += match(source, /[\p{sc=Han}]{1}/gu);
+        wc.zh += match(source, /\w+/g);
+        wc.en += match(translation, /\w+/g);
+      }
     }
   }
 
-  csv += `${wc.zh}⌚${wc.en}\n`;
+  csv += `⌚${wc.zh}⌚${wc.en}\n`;
 
   if (
     confirm(
@@ -188,13 +199,20 @@ function hasMore() {
 }
 
 function go({ sources = [], translations = [] } = {}) {
+  const currentTranslations = [];
+  const currentSources = [];
+
   Array.from(document.querySelectorAll(".target-input")).forEach((target) => {
-    translations.push([target.value]);
+    currentTranslations.push(target.value);
   });
 
+  translations.push(currentTranslations);
+
   Array.from(document.querySelectorAll(".source-input")).forEach((source) => {
-    sources.push([source.value]);
+    currentSources.push(source.value);
   });
+
+  sources.push(currentSources);
 
   const data = { sources, translations };
 
