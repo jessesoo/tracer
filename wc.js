@@ -94,7 +94,7 @@ function addButton() {
   button.addEventListener("click", (event) => {
     if (
       confirm(
-        "Do you want to run word count? ⚠️ Any unsaved changes will be lost."
+        "Do you want to count words? ⚠️ Any unsaved changes will be lost."
       )
     ) {
       run();
