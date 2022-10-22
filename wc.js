@@ -81,7 +81,7 @@ function addButton() {
   }
 
   const button = document.createElement("div");
-  button.innerHTML = "🧮";
+  button.innerHTML = "Wc";
   button.dataset.name = "gm-wc";
   button.style.width = "40px";
   button.style.height = "40px";
