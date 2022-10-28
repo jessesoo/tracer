@@ -139,8 +139,6 @@ function downloadFile({ sources, translations } = {}) {
     en: 0,
   };
 
-  debugger;
-
   for (let i = 0; i < translations.length; i++) {
     const pageTranslations = translations[i];
     const pageSources = sources[i];
