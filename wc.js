@@ -191,22 +191,25 @@ function getImageCards() {
 function hasMore() {
   const cards = getImageCards();
 
-  return (
-    cards.length > 0 && !cards[cards.length - 1].classList.contains("actived")
-  );
+  return;
+  cards.length > 0 && !cards[cards.length - 1].classList.contains("actived");
 }
 
 function go({ sources = [], translations = [] } = {}) {
   const currentTranslations = [];
   const currentSources = [];
 
-  Array.from(document.querySelectorAll(".target-input")).forEach((target) => {
+  Array.from(
+    document.querySelectorAll(`textarea:not([disabled=""]).target-input`)
+  ).forEach((target) => {
     currentTranslations.push(target.value);
   });
 
   translations.push(currentTranslations);
 
-  Array.from(document.querySelectorAll(".source-input")).forEach((source) => {
+  Array.from(
+    document.querySelectorAll(`textarea:not([disabled=""]).source-input`)
+  ).forEach((source) => {
     currentSources.push(source.value);
   });
 
