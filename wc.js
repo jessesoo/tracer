@@ -191,8 +191,9 @@ function getImageCards() {
 function hasMore() {
   const cards = getImageCards();
 
-  return;
-  cards.length > 0 && !cards[cards.length - 1].classList.contains("actived");
+  return (
+    cards.length > 0 && !cards[cards.length - 1].classList.contains("actived")
+  );
 }
 
 function go({ sources = [], translations = [] } = {}) {
@@ -217,14 +218,14 @@ function go({ sources = [], translations = [] } = {}) {
 
   const data = { sources, translations };
 
+  if (!hasMore()) {
+    downloadFile(data);
+    return;
+  }
+
   next();
   waitUntilLoaded(() => {
-    if (hasMore()) {
-      go(data);
-      return;
-    }
-
-    downloadFile(data);
+    go(data);
   });
 }
 
