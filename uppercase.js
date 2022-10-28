@@ -1,3 +1,4 @@
+
 var cancel = false;
 
 function waitUntilLoaded(callback) {
@@ -197,7 +198,7 @@ function hasMore() {
 }
 
 function uppercase(callback) {
-  Array.from(document.querySelectorAll(".target-input")).forEach((target) => {
+  Array.from(document.querySelectorAll(`textarea:not([disabled=""]).target-input`)).forEach((target) => {
     if (target.value == "") {
       return;
     }
