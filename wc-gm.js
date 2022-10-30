@@ -122,8 +122,6 @@ function main() {
   if (!isTranslationPage()) {
     return;
   }
-  
-  console.log('main');
 
   addButton();
 }
