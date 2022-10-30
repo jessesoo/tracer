@@ -12,7 +12,7 @@ Install a userscript extension.
 3. Go to the chapter that you want to extract word count from.
 4. An icon with the text **"Wc"** will appear at the top.
 
-![Screenshot 2022-10-22 at 6 10 03 PM](https://user-images.githubusercontent.com/70749497/197333686-faed0f27-0bae-458b-919e-f960c372d5f2.png)
+![197333686-faed0f27-0bae-458b-919e-f960c372d5f2](https://user-images.githubusercontent.com/70749497/198875239-b06eec29-0c77-4cc1-94bf-0ba96a390d64.png)
 
 5. Save your work and click on the icon to run word count.
 6. Wait until the script finishes running. 
@@ -21,4 +21,5 @@ Install a userscript extension.
 
 7. Press OK to download a summary (an Excel file).
 8. Done!
+
 
