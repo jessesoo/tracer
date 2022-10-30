@@ -2,7 +2,7 @@
 // @name     wc (Tracer)
 // @version  1
 // @grant    none
-// @match    https://www.bilibilicomics.com/tracer/#/translate-editor
+// @include  https://www.bilibilicomics.com/tracer/#/translate-editor/*
 // @require  https://cdn.sheetjs.com/xlsx-0.19.0/package/dist/xlsx.mini.min.js
 // ==/UserScript==
 
@@ -122,6 +122,8 @@ function main() {
   if (!isTranslationPage()) {
     return;
   }
+  
+  console.log('main');
 
   addButton();
 }
