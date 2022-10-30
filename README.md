@@ -1,4 +1,4 @@
-## Prerequisite
+## ☝️ Prerequisite
 
 Install a userscript extension.
 
