@@ -3,8 +3,8 @@
 Install a userscript extension.
 
 ### Firefox: 
-* [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
 * [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) 
+* [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
 
 ### Chrome/Edge:
 * [Violentmonkey](https://chrome.google.com/webstore/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
