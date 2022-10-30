@@ -1,8 +1,13 @@
 ## Prerequisite
 
 Install a userscript extension.
-* [Greasemonkey (Firefox)](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) or [Violentmonkey (Firefox)](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
-* [Violentmonkey (Chrome/Edge)](https://chrome.google.com/webstore/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
+
+### Firefox: 
+* [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
+* [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) 
+
+### Chrome/Edge:
+* [Violentmonkey](https://chrome.google.com/webstore/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
 
 ## How-to (Word Count)
 1. Create a new userscript. 
