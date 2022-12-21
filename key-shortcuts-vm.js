@@ -73,7 +73,7 @@ function onKeydown(event) {
 
 function isTranslationPage() {
   return window.location.href.startsWith(
-    "https://www.bilibilicomics.com/tracer/#/translate-editor"
+    "https://www.bilibilicomics.com/tracer"
   );
 }
 
