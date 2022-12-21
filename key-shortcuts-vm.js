@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        key shortcuts (Tracer)
 // @namespace   Tracer / Key Shortcuts
-// @match       https://www.bilibilicomics.com/tracer/#/translate-editor/*
+// @match       https://www.bilibilicomics.com/tracer/*
 // @grant       none
 // @version     1.0
 // ==/UserScript==
