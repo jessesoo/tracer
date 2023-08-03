@@ -3,6 +3,7 @@
 // @version  1
 // @grant    none
 // @include  https://www.bilibilicomics.com/tracer/#/translate-editor/*
+// @include  https://www.bilibilicomics.com/tracer#/translate-editor/*
 // @require  https://cdn.sheetjs.com/xlsx-0.19.0/package/dist/xlsx.mini.min.js
 // ==/UserScript==
 
