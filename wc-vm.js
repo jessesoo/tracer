@@ -2,6 +2,7 @@
 // @name        wc (Tracer)
 // @namespace   Tracer
 // @match       https://www.bilibilicomics.com/tracer/#/translate-editor/*
+// @match       https://www.bilibilicomics.com/tracer#/translate-editor/*
 // @require     https://cdn.sheetjs.com/xlsx-0.19.0/package/dist/xlsx.mini.min.js
 // @grant       none
 // @version     1.0
